@@ -1,6 +1,9 @@
 import { equal } from 'assert';
 
 export function test(input, process, answer) {
+  if (!Array.isArray(input)) {
+    input = [input];
+  }
   let output = process.apply(this, input);
   try {
     equal(output, answer);
