@@ -1,20 +1,5 @@
 import { test } from '../test';
-
-// Find the greatest common divisor of two numbers
-let greatestCommenDivisor = function(a, b) {
-    if (b) {
-        return greatestCommenDivisor(b, a % b);
-    } else {
-        return Math.abs(a);
-    }
-};
-
-let lowestCommenMultiple = function(numbers) {
-  let lcm = function(a, b) {
-    return a * (b / greatestCommenDivisor(a, b));
-  }
-  return numbers.reduce(lcm);
-};
+import { greatestCommenDivisor, lowestCommenMultiple } from '../mathlib';
 
 let addFractions = function(num, ...input) {
   // Convert the fractions to an array of arrays
