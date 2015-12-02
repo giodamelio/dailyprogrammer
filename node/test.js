@@ -1,16 +1,30 @@
 import { equal } from 'assert';
 
-export function test(input, process, answer) {
+const GREEN = '\x1B\[32m';
+const RED = '\x1B\[31m';
+const END = '\x1B\[0m';
+
+export default function test(input, process, answer) {
   if (!Array.isArray(input)) {
     input = [input];
   }
   let output = process.apply(this, input);
   try {
     equal(output, answer);
-    console.log('\x1B\[32m' + `Input: ${input}\nOutput: ${output}\nCorrect Answer: ${answer}` + '\x1B\[0m' + '\n---');
+    console.log(
+`${GREEN}  Input: ${input}
+  Output: ${output}
+  Correct Answer: ${answer}${END}
+`
+    );
   } catch (e) {
     if (e.name == 'AssertionError' ) {
-      console.log('\x1B\[31m' + `Input: ${input}\nOutput: ${output}\nCorrect Answer: ${answer}` + '\x1B\[0m' + '\n---');
+      console.log(
+`${RED}  Input: ${input}
+  Output: ${output}
+  Correct Answer: ${answer}${END}
+`
+      );
     } else {
       throw e;
     }

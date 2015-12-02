@@ -1,4 +1,4 @@
-import { test } from '../test';
+import test from '../test';
 import { greatestCommenDivisor, lowestCommenMultiple } from '../mathlib';
 
 let addFractions = function(num, ...input) {
