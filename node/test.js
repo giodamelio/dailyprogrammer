@@ -5,14 +5,17 @@ const RED = '\x1B\[31m';
 const END = '\x1B\[0m';
 
 export default function test(input, process, answer) {
+  let output;
   if (!Array.isArray(input)) {
-    input = [input];
+    output = process.apply(this, [input]);
+  } else {
+    output = process.apply(this, input);
   }
-  let output = process.apply(this, input);
+
   try {
     equal(output, answer);
     console.log(
-`${GREEN}  Input: ${input}
+`${GREEN}  Input: ${JSON.stringify(input)}
   Output: ${output}
   Correct Answer: ${answer}${END}
 `
@@ -20,7 +23,7 @@ export default function test(input, process, answer) {
   } catch (e) {
     if (e.name == 'AssertionError' ) {
       console.log(
-`${RED}  Input: ${input}
+`${RED}  Input: ${JSON.stringify(input)}
   Output: ${output}
   Correct Answer: ${answer}${END}
 `
